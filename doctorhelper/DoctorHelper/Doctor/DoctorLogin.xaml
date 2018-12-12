@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="DoctorHelper.Doctor.DoctorLogin"
+             Title="Вход для врача">
+    <ContentPage.Content>
+        <StackLayout Padding="16" Spacing="10">
+            <Label Text="Логин"/>
+            <Entry x:Name="LoginEntry"/>
+            <Label Text="Пароль"/>
+            <Entry x:Name="PasswordEntry" IsPassword="true" />
+            <Button Text="Войти" Clicked="Login_Clicked"/>
+            <Button Text="Зарегистрироваться" Clicked="Reg_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

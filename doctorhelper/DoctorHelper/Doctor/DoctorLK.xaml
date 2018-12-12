@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="DoctorHelper.Doctor.DoctorLK"
+             Title="Личный кабинет">
+    <ContentPage.Content>
+        <StackLayout Padding="16" Spacing="10"> 
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Фамилия:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="SurnameLabel" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Имя:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="NameLabel" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Отчество:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="PatronymicLabel" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <Button Text="Показать список пациентов" Clicked="ShowPatientsPage_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

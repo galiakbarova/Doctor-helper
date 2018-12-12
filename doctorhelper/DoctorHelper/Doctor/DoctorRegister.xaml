@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="DoctorHelper.Doctor.DoctorRegister"
+             Title="Регистрация врача">
+    <ContentPage.Content>
+        <StackLayout Padding="16">
+            <Label Text="Фамилия"/>
+            <Entry x:Name="SurnameEntry"/>
+            <Label Text="Имя"/>
+            <Entry x:Name="NameEntry"/>
+            <Label Text="Отчество"/>
+            <Entry x:Name="PatronymicEntry"/>
+            <Label Text="Адрес клиники" />
+            <Entry x:Name="HospitalEntry"/>
+            <Label Text="Логин"/>
+            <Entry x:Name="LoginEntry"/>
+            <Label Text="Пароль"/>
+            <Entry IsPassword="true" x:Name="PasswordEntry"/>
+            <Label Text="Повторите пароль"/>
+            <Entry IsPassword="true" x:Name="RepeatPasswordEntry"/>
+            <Button Text="Регистрация" x:Name="RegisterButton" Clicked="RegisterButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
