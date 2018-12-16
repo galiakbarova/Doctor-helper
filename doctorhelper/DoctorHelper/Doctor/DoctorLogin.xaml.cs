@@ -25,9 +25,9 @@ namespace DoctorHelper.Doctor
 
         private SqlConnection OpenConnection()
         {
-            String connectionString = "Data Source = " + DataSourse +
-                "; Initial Catalog = " + DataBase +
-                "; Persist Security Info = true; User ID = " + User +
+            String connectionString = "Server = " + DataSourse +
+                "; Database = " + DataBase +
+                "; User ID = " + User +
                 "; Password = " + DbPassword;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -39,8 +39,8 @@ namespace DoctorHelper.Doctor
             try
             {
                 var connection = OpenConnection();
-                String commandString = "SELECT id FROM " + DoctorTable + " WHERE " + Login + " = " + LoginEntry.Text.ToLower()
-                    + " AND " + Password + " = " + PasswordEntry.Text.ToLower();
+                String commandString = "SELECT id FROM " + DoctorTable + " WHERE " + Login + " = '" + LoginEntry.Text.ToLower()
+                    + "' AND " + Password + " = '" + PasswordEntry.Text.ToLower() + "';";
                 var command = new SqlCommand(commandString, connection);
                 using (var reader = command.ExecuteReader())
                 {

@@ -24,13 +24,14 @@ namespace DoctorHelper.Patient
         {
             InitializeComponent();
             UserId = userId;
+            SetUserData();
         }
 
         private SqlConnection OpenConnection()
         {
-            String connectionString = "Data Source = " + DataSourse +
-                "; Initial Catalog = " + DataBase +
-                "; Persist Security Info = true; User ID = " + User +
+            String connectionString = "Server = " + DataSourse +
+                "; Database = " + DataBase +
+                "; User ID = " + User +
                 "; Password = " + DbPassword;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -42,7 +43,7 @@ namespace DoctorHelper.Patient
             try
             {
                 var connection = OpenConnection();
-                String commandString = "SELECT * FROM " + PatientTable + " WHERE " + DataBaseId + " = " + UserId;
+                String commandString = "SELECT * FROM " + PatientTable + " WHERE " + DataBaseId + " = " + UserId + ";";
                 var command = new SqlCommand(commandString, connection);
                 using (var reader = command.ExecuteReader())
                 {

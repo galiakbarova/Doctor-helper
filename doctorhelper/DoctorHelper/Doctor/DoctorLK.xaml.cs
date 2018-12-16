@@ -31,9 +31,9 @@ namespace DoctorHelper.Doctor
 
         private SqlConnection OpenConnection()
         {
-            String connectionString = "Data Source = " + DataSourse +
-                "; Initial Catalog = " + DataBase +
-                "; Persist Security Info = true; User ID = " + User +
+            String connectionString = "Server = " + DataSourse +
+                "; Database = " + DataBase +
+                "; User ID = " + User +
                 "; Password = " + DbPassword;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -45,7 +45,7 @@ namespace DoctorHelper.Doctor
             try
             {
                 var connection = OpenConnection();
-                String commandString = "SELECT * FROM " + DoctorTable + " WHERE " + DataBaseId + " = " + UserId;
+                String commandString = "SELECT * FROM " + DoctorTable + " WHERE " + DataBaseId + " = " + UserId + ";";
                 var command = new SqlCommand(commandString, connection);
                 using (var reader = command.ExecuteReader())
                 {

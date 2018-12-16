@@ -19,6 +19,16 @@
             <Entry IsPassword="true" x:Name="PasswordEntry"/>
             <Label Text="Повторите пароль"/>
             <Entry IsPassword="true" x:Name="RepeatPasswordEntry"/>
+            <Label Text="Номер смены (ПН)"/>
+            <Entry x:Name="MondayShiftEntry"/>
+            <Label Text="Номер смены (ВТ)"/>
+            <Entry x:Name="TuesdayShiftEntry"/>
+            <Label Text="Номер смены (СР)"/>
+            <Entry x:Name="WednesdayShiftEntry"/>
+            <Label Text="Номер смены (ЧТ)"/>
+            <Entry x:Name="ThursdayShiftEntry"/>
+            <Label Text="Номер смены (ПТ)"/>
+            <Entry x:Name="FridayShiftEntry"/>
             <Button Text="Регистрация" x:Name="RegisterButton" Clicked="RegisterButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

@@ -18,11 +18,6 @@ namespace DoctorHelper.Patient
         private readonly String Patronymic = "patronymic";
         private readonly String Login = "login";
         private readonly String Password = "password";
-        private readonly String MondayShift = "monday_shift";
-        private readonly String TuesdayShift = "tuesday_shift";
-        private readonly String WednesdayShift = "wednesday_shift";
-        private readonly String ThursdayShift = "thursday_shift";
-        private readonly String FridayShift = "friday_shift";
 
         public PatientRegister()
         {
@@ -31,9 +26,9 @@ namespace DoctorHelper.Patient
 
         private SqlConnection OpenConnection()
         {
-            String connectionString = "Data Source = " + DataSourse +
-                "; Initial Catalog = " + DataBase +
-                "; Persist Security Info = true; User ID = " + User +
+            String connectionString = "Server = " + DataSourse +
+                "; Database = " + DataBase +
+                "; User ID = " + User +
                 "; Password = " + DbPassword;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -46,21 +41,12 @@ namespace DoctorHelper.Patient
             {
                 var connection = OpenConnection();
                 String commandString = "INSERT INTO " + PatientTable +
-                    "(" + Surname + ", " + Name + ", " + Patronymic + ", "
-                    + Login + ", " + Password + ", " 
-                    + MondayShift + ", " + TuesdayShift 
-                    + ", " + WednesdayShift + ", " + ThursdayShift 
-                    + ", " + FridayShift + ") " +
-                    "VALUES (" + SurnameEntry.Text.ToLower() + ", " +
-                    NameEntry.Text.ToLower() + ", " +
-                    PatronymicEntry.Text.ToLower() + ", " +
-                    LoginEntry.Text.ToLower() + ", " +
-                    PasswordEntry.Text.ToLower() + ", " +
-                    MondayShiftEntry.Text + ", " +
-                    TuesdayShiftEntry.Text + ", " +
-                    WednesdayShiftEntry.Text + ", " +
-                    ThursdayShiftEntry.Text + ", " +
-                    FridayShiftEntry.Text + ")";
+                    "(" + Surname + ", " + Name + ", " + Patronymic + ", " + Login + ", " + Password + ") " +
+                    "VALUES ('" + SurnameEntry.Text.ToLower() + "', '" +
+                    NameEntry.Text.ToLower() + "', '" +
+                    PatronymicEntry.Text.ToLower() + "', '" +
+                    LoginEntry.Text.ToLower() + "', '" +
+                    PasswordEntry.Text.ToLower() + "')";
 
                 using (SqlCommand command = new SqlCommand(commandString, connection))
                 {
@@ -79,10 +65,7 @@ namespace DoctorHelper.Patient
         {
             if (CheckDataFilling())
                 if (CheckPasswordSimilarity())
-                    if (CheckShifts())
-                        AddNewPatient();
-                    else
-                        DisplayAlert("Внимание!", "Номер смены может быть 1 или 2!", "OK");
+                    AddNewPatient();
                 else
                     DisplayAlert("Внимание!", "Пароли не совпадают!", "OK");
             else
@@ -95,26 +78,11 @@ namespace DoctorHelper.Patient
                 && (NameEntry.Text.Length > 0)
                 && (PatronymicEntry.Text.Length > 0)
                 && (LoginEntry.Text.Length > 0)
-                && (PasswordEntry.Text.Length > 0)
-                && (MondayShiftEntry.Text.Length > 0)
-                && (TuesdayShiftEntry.Text.Length > 0)
-                && (WednesdayShiftEntry.Text.Length > 0)
-                && (ThursdayShiftEntry.Text.Length > 0)
-                && (FridayShiftEntry.Text.Length > 0))
+                && (PasswordEntry.Text.Length > 0))
                 return true;
             return false;
         }
 
-        private bool CheckShifts()
-        {
-            if ((Convert.ToInt32(MondayShiftEntry.Text) == 1 || Convert.ToInt32(MondayShiftEntry.Text) == 2)
-                && (Convert.ToInt32(TuesdayShiftEntry.Text) == 1 || Convert.ToInt32(TuesdayShiftEntry.Text) == 2)
-                && (Convert.ToInt32(WednesdayShiftEntry.Text) == 1 || Convert.ToInt32(WednesdayShiftEntry.Text) == 2)
-                && (Convert.ToInt32(ThursdayShiftEntry.Text) == 1 || Convert.ToInt32(ThursdayShiftEntry.Text) == 2)
-                && (Convert.ToInt32(FridayShiftEntry.Text) == 1 || Convert.ToInt32(FridayShiftEntry.Text) == 2))
-                return true;
-            return false;
-        }
 
         private bool CheckPasswordSimilarity()
         {
