@@ -21,7 +21,7 @@ namespace DoctorHelper.Doctor
         private readonly String HospitalAddress = "address";
         private readonly String Login = "login";
         private readonly String Password = "password";
-        private readonly String MondayShift = "monday_shift";
+        private readonly String MondayShift = "mondayshift";
         private readonly String TuesdayShift = "tuesday_shift";
         private readonly String WednesdayShift = "wednesday_shift";
         private readonly String ThursdayShift = "thursday_shift";
@@ -49,15 +49,15 @@ namespace DoctorHelper.Doctor
             {
                 var connection = OpenConnection();
                 String commandString = "INSERT INTO " + DoctorTable +
-                    "(" + Surname + ", " + Name + ", " + Patronymic + ", " 
+                    "(" + Surname + ", " + Name + ", " + Patronymic + ", "
                     + HospitalId + ", " + Login + ", " + Password + ", "
                     + MondayShift + ", " + TuesdayShift
                     + ", " + WednesdayShift + ", " + ThursdayShift
                     + ", " + FridayShift + ") " +
                     "VALUES ('" + SurnameEntry.Text.ToLower() + "', '" +
                     NameEntry.Text.ToLower() + "', '" +
-                    PatronymicEntry.Text.ToLower() + "', '" +
-                    "(SELECT FROM " + HospitalTable + " id WHERE " + HospitalAddress + " = " + HospitalEntry.Text.ToLower() + "), " +
+                    PatronymicEntry.Text.ToLower() + "', " +
+                    "(SELECT id FROM " + HospitalTable + " WHERE " + HospitalAddress + " = N'" + HospitalEntry.Text.ToLower() + "'), '" +
                     LoginEntry.Text.ToLower() + "', '" +
                     PasswordEntry.Text.ToLower() + "', " +
                     Convert.ToInt32(MondayShiftEntry.Text) + ", " +
