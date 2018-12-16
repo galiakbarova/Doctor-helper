@@ -17,6 +17,14 @@
                 <Label Text="Отчество:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
                 <Label x:Name="PatronymicLabel" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Клиника:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="HospitalNameLabel" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Адрес клиники:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="HospitalAddressLabel" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
             <Button Text="Показать список пациентов" Clicked="ShowPatientsPage_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

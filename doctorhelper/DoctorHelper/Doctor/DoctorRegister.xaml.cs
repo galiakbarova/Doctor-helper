@@ -84,13 +84,36 @@ namespace DoctorHelper.Doctor
             if (CheckDataFilling())
                 if (CheckPasswordSimilarity())
                     if (CheckShifts())
+                    {
                         AddNewDoctor();
+                        var ID = GetDoctorId();
+                        if (ID != -1)
+                            Navigation.PushAsync(new DoctorLK(ID));
+                    }
                     else
                         DisplayAlert("Внимание!", "Номер смены может быть 1 или 2!", "OK");
                 else
                     DisplayAlert("Внимание!", "Пароли не совпадают!", "OK");
             else
                 DisplayAlert("Внимание!", "Все поля должны быть заполнены!", "OK");
+        }
+
+        private int GetDoctorId()
+        {
+            var ID = -1;
+            var connection = OpenConnection();
+
+            String queryString = "SELECT id FROM " + DoctorTable + " WHERE " + Login + " = '" + LoginEntry.Text.ToLower()
+                    + "' AND " + Password + " = '" + PasswordEntry.Text.ToLower() + "';";
+
+            var command = new SqlCommand(queryString, connection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                    ID = reader.GetInt32(0);
+            }
+
+            return ID;
         }
 
         private bool CheckDataFilling()

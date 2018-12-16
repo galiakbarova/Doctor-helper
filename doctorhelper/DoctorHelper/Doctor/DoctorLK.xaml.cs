@@ -27,6 +27,7 @@ namespace DoctorHelper.Doctor
         {
             InitializeComponent();
             UserId = userId;
+            SetUserData();
         }
 
         private SqlConnection OpenConnection()
@@ -47,6 +48,7 @@ namespace DoctorHelper.Doctor
                 var connection = OpenConnection();
                 String commandString = "SELECT * FROM " + DoctorTable + " WHERE " + DataBaseId + " = " + UserId + ";";
                 var command = new SqlCommand(commandString, connection);
+                var hospital_id = -1;
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -54,8 +56,22 @@ namespace DoctorHelper.Doctor
                         SurnameLabel.Text = reader.GetString(1);
                         NameLabel.Text = reader.GetString(2);
                         PatronymicLabel.Text = reader.GetString(3);
+                        hospital_id = reader.GetInt32(4);
                     }
                 }
+
+                commandString = "SELECT * FROM " + HospitalTable + " WHERE " + DataBaseId + " = " + hospital_id + ";";
+                command = new SqlCommand(commandString, connection);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        HospitalNameLabel.Text = reader.GetString(1);
+                        HospitalAddressLabel.Text = reader.GetString(2);
+                    }
+                }
+
                 connection.Close();
             }
             catch
