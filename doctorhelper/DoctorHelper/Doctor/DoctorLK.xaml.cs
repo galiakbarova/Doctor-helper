@@ -80,9 +80,9 @@ namespace DoctorHelper.Doctor
             }
         }
 
-        void ShowPatientsPage_Clicked(object sender, System.EventArgs e)
+        void ShowSchedulePage_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ShowPatients());
+            //Navigation.PushAsync(new ShowPatients());
         }
     }
 }

@@ -17,6 +17,7 @@
                 <Label Text="Отчество:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
                 <Label x:Name="PatronymicLabel" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
+            <Button Text="Записаться к врачу" Clicked="Book_Clicked"/>
             <Button Text="Посмотреть результаты анализов" Clicked="ShowAnalyze_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

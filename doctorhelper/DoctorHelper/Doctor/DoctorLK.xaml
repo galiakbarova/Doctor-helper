@@ -25,7 +25,7 @@
                 <Label Text="Адрес клиники:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
                 <Label x:Name="HospitalAddressLabel" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Button Text="Показать список пациентов" Clicked="ShowPatientsPage_Clicked"/>
+            <Button Text="Показать расписание" Clicked="ShowSchedulePage_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

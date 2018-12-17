@@ -65,5 +65,10 @@ namespace DoctorHelper.Patient
         void ShowAnalyze_Clicked(object sender, System.EventArgs e)
         {
         }
+
+        private void Book_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Hospitals(UserId));
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace DoctorHelper.Doctor
         private readonly String DataBase = "doctor_helper";
         private readonly String DoctorTable = "doctor";
         private readonly String HospitalTable = "hospital";
+        private readonly String ScheduleTable = "schedule";
         private readonly String Surname = "surname";
         private readonly String Name = "name";
         private readonly String Patronymic = "patronymic";
@@ -147,6 +148,51 @@ namespace DoctorHelper.Doctor
         private bool CheckPasswordSimilarity()
         {
             return PasswordEntry.Text == RepeatPasswordEntry.Text;
+        }
+
+        public string GetInitialConsultationTime(DateTime date)
+        {
+            switch ((int)date.Date.DayOfWeek)
+            {
+                case 0:
+                    if (MondayShiftEntry.Text == "1")
+                        return "08:00";
+                    else
+                        return "13:00";
+                case 1:
+                    if (TuesdayShiftEntry.Text == "1")
+                        return "08:00";
+                    else
+                        return "13:00";
+                case 2:
+                    if (WednesdayShiftEntry.Text == "1")
+                        return "08:00";
+                    else
+                        return "13:00";
+                case 4:
+                    if (ThursdayShiftEntry.Text == "1")
+                        return "08:00";
+                    else
+                        return "13:00";
+                default:
+                    return "00:00";
+            }
+        }
+
+        private void MakeSchedule()
+        {
+            var connection = OpenConnection();
+            var currentDate = DateTime.Now.Date;
+
+            for (int i = 0; i < 5; i++)
+            {
+                String queryString = "INSERT INTO " + ScheduleTable
+                    + "(doctor_id, consultation_date, consultation_time, is_free) VALUES ("
+                    + GetDoctorId() + ", " + ");";
+
+                var command = new SqlCommand(queryString, connection);
+            }
+
         }
     }
 }
