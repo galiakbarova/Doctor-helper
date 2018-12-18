@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 using Android.App;
 using Android.Content.PM;
@@ -20,6 +21,7 @@ namespace DoctorHelper.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+            App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
     }
 }

@@ -95,6 +95,7 @@ namespace DoctorHelper.Patient
 
                 connection.Close();
                 DisplayAlert("Внимание!", "Вы успешно записались к врачу!", "OK");
+                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 1]);
             }
             catch
             {

@@ -64,6 +64,7 @@ namespace DoctorHelper.Patient
 
         void ShowAnalyze_Clicked(object sender, System.EventArgs e)
         {
+            Navigation.PushAsync(new BloodResults(UserId));
         }
 
         private void Book_Clicked(object sender, EventArgs e)

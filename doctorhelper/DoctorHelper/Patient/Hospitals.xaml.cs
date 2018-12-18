@@ -92,6 +92,7 @@ namespace DoctorHelper.Patient
             if (CheckHospitalSelection())
             {
                 Navigation.PushAsync(new Doctors(UserId, GetHospitalId()));
+                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
             }
             else
                 DisplayAlert("Внимание!", "Выберите клинику!", "OK");

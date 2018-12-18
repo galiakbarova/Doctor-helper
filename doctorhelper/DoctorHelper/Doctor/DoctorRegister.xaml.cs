@@ -55,8 +55,8 @@ namespace DoctorHelper.Doctor
                     + MondayShift + ", " + TuesdayShift
                     + ", " + WednesdayShift + ", " + ThursdayShift
                     + ", " + FridayShift + ") " +
-                    "VALUES ('" + SurnameEntry.Text.ToLower() + "', '" +
-                    NameEntry.Text.ToLower() + "', '" +
+                    "VALUES (N'" + SurnameEntry.Text.ToLower() + "', N'" +
+                    NameEntry.Text.ToLower() + "', N'" +
                     PatronymicEntry.Text.ToLower() + "', " +
                     "(SELECT id FROM " + HospitalTable + " WHERE " + HospitalAddress + " = N'" + HospitalEntry.Text.ToLower() + "'), '" +
                     LoginEntry.Text.ToLower() + "', '" +
@@ -87,9 +87,13 @@ namespace DoctorHelper.Doctor
                     if (CheckShifts())
                     {
                         AddNewDoctor();
+                        MakeSchedule();
                         var ID = GetDoctorId();
                         if (ID != -1)
+                        {
                             Navigation.PushAsync(new DoctorLK(ID));
+                            this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+                        }
                     }
                     else
                         DisplayAlert("Внимание!", "Номер смены может быть 1 или 2!", "OK");
@@ -150,49 +154,63 @@ namespace DoctorHelper.Doctor
             return PasswordEntry.Text == RepeatPasswordEntry.Text;
         }
 
-        public string GetInitialConsultationTime(DateTime date)
+        public int GetInitialConsultationTime(DateTime date)
         {
             switch ((int)date.Date.DayOfWeek)
             {
                 case 0:
                     if (MondayShiftEntry.Text == "1")
-                        return "08:00";
+                        return 8;
                     else
-                        return "13:00";
+                        return 13;
                 case 1:
                     if (TuesdayShiftEntry.Text == "1")
-                        return "08:00";
+                        return 8;
                     else
-                        return "13:00";
+                        return 13;
                 case 2:
                     if (WednesdayShiftEntry.Text == "1")
-                        return "08:00";
+                        return 8;
                     else
-                        return "13:00";
+                        return 13;
                 case 4:
                     if (ThursdayShiftEntry.Text == "1")
-                        return "08:00";
+                        return 8;
                     else
-                        return "13:00";
+                        return 13;
                 default:
-                    return "00:00";
+                    return 0;
             }
         }
 
         private void MakeSchedule()
         {
             var connection = OpenConnection();
-            var currentDate = DateTime.Now.Date;
+            var currentDate = DateTime.Now.Date.AddDays(1);
 
             for (int i = 0; i < 5; i++)
             {
-                String queryString = "INSERT INTO " + ScheduleTable
-                    + "(doctor_id, consultation_date, consultation_time, is_free) VALUES ("
-                    + GetDoctorId() + ", " + ");";
+                if (GetInitialConsultationTime(currentDate.AddDays(i)) != 0)
+                    for (int j = 0; j < 5; j++)
+                    {
+                        string time = "";
 
-                var command = new SqlCommand(queryString, connection);
+                        if (GetInitialConsultationTime(currentDate.AddDays(i)) + j < 10)
+                            time += "0";
+
+                        time += (GetInitialConsultationTime(currentDate.AddDays(i)) + j).ToString() + ":00:00";
+
+                        String queryString = "INSERT INTO " + ScheduleTable
+                            + " (doctor_id, consultation_date, consultation_time, is_free) VALUES ("
+                            + GetDoctorId() + ", '" + currentDate.AddDays(i).ToString("yyyy-MM-dd") + "', '"
+                            + time + "', 'True');";
+
+                        var command = new SqlCommand(queryString, connection);
+                        command.ExecuteNonQuery();
+                    }
             }
 
+            connection.Close();
         }
     }
 }

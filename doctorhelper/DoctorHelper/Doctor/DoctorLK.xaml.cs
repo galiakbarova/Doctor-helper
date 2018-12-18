@@ -14,11 +14,6 @@ namespace DoctorHelper.Doctor
         private readonly String DataBase = "doctor_helper";
         private readonly String DoctorTable = "doctor";
         private readonly String HospitalTable = "hospital";
-        private readonly String Surname = "surname";
-        private readonly String Name = "name";
-        private readonly String Patronymic = "patronymic";
-        private readonly String HospitalId = "hospital_id";
-        private readonly String HospitalAddress = "address";
         private readonly String DataBaseId = "id";
 
         private Int32 UserId { get; set; }
@@ -82,7 +77,7 @@ namespace DoctorHelper.Doctor
 
         void ShowSchedulePage_Clicked(object sender, System.EventArgs e)
         {
-            //Navigation.PushAsync(new ShowPatients());
+            Navigation.PushAsync(new Schedule(UserId));
         }
     }
 }

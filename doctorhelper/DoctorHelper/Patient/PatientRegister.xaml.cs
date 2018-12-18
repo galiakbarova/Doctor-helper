@@ -42,8 +42,8 @@ namespace DoctorHelper.Patient
                 var connection = OpenConnection();
                 String commandString = "INSERT INTO " + PatientTable +
                     "(" + Surname + ", " + Name + ", " + Patronymic + ", " + Login + ", " + Password + ") " +
-                    "VALUES ('" + SurnameEntry.Text.ToLower() + "', '" +
-                    NameEntry.Text.ToLower() + "', '" +
+                    "VALUES (N'" + SurnameEntry.Text.ToLower() + "', N'" +
+                    NameEntry.Text.ToLower() + "', N'" +
                     PatronymicEntry.Text.ToLower() + "', '" +
                     LoginEntry.Text.ToLower() + "', '" +
                     PasswordEntry.Text.ToLower() + "')";
@@ -69,7 +69,10 @@ namespace DoctorHelper.Patient
                     AddNewPatient();
                     var ID = GetPatientId();
                     if (ID != -1)
+                    {
                         Navigation.PushAsync(new PatientLK(ID));
+                        this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+                    }
                 }
                 else
                     DisplayAlert("Внимание!", "Пароли не совпадают!", "OK");

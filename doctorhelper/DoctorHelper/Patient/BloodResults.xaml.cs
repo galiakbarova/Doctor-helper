@@ -8,25 +8,25 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DoctorHelper.Doctor
+namespace DoctorHelper.Patient
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Schedule : ContentPage
-    {
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class BloodResults : ContentPage
+	{
         private readonly String DataSourse = "104.248.240.225";
         private readonly String User = "sa";
         private readonly String DbPassword = "Unya7532";
         private readonly String DataBase = "doctor_helper";
-        private readonly String ScheduleTable = "schedule";
+        private readonly String ResultTable = "results";
 
-        private Int32 DoctorId { get; set; }
+        private Int32 PatientId { get; set; }
 
-        public Schedule(Int32 doctorId)
-        {
-            InitializeComponent();
-            DoctorId = doctorId;
-            SetScheduleData();
-        }
+		public BloodResults (Int32 patientId)
+		{
+			InitializeComponent ();
+            PatientId = patientId;
+            SetBloodInvestigationResultsList();
+		}
 
         private SqlConnection OpenConnection()
         {
@@ -39,7 +39,7 @@ namespace DoctorHelper.Doctor
             return connection;
         }
 
-        private void SetScheduleData()
+        private void SetBloodInvestigationResultsList()
         {
             var listView = new ListView();
             var itemsSource = new List<String>();
@@ -47,15 +47,14 @@ namespace DoctorHelper.Doctor
             try
             {
                 var connection = OpenConnection();
-                String commandString = "SELECT * FROM " + ScheduleTable + " WHERE doctor_id = " + DoctorId + " AND is_free = 'False';";
+                String commandString = "SELECT investigation_date FROM " + ResultTable + " WHERE patient_id = " + PatientId + ";";
 
                 var command = new SqlCommand(commandString, connection);
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        string dateTime = reader.GetDateTime(2).Date.ToString("dd.MM.yyyy") +
-                            " " + reader.GetTimeSpan(3).ToString();
+                        string dateTime = reader.GetDateTime(0).Date.ToString("dd.MM.yyyy");
                         itemsSource.Add(dateTime);
                     }
                 }
@@ -64,22 +63,23 @@ namespace DoctorHelper.Doctor
             }
             catch
             {
-                DisplayAlert("Внимание!", "Не удалось подключиться!", "OK");
+                DisplayAlert("Внимание!", "Не удалось загрузить результаты!", "OK");
             }
 
-            listView.ItemsSource = itemsSource;
             listView.ItemTapped += OnItemTapped;
+            listView.ItemsSource = itemsSource;
             ContentField.Children.Add(listView);
         }
 
-        private Int32 GetPatientId(string dateTime)
+        private Int32 GetInvestigationId(string dateTime)
         {
             int ID = -1;
+
             var date = Convert.ToDateTime(dateTime);
 
             var connection = OpenConnection();
-            String commandString = "SELECT patient_id FROM " + ScheduleTable + " WHERE consultation_date = '"
-                + date.ToString("yyyy-MM-dd") + "' AND consultation_time = '" + date.TimeOfDay + "';";
+            String commandString = "SELECT id FROM " + ResultTable + " WHERE investigation_date = '"
+                + date.ToString("yyyy-MM-dd") + "';";
             var command = new SqlCommand(commandString, connection);
             using (var reader = command.ExecuteReader())
             {
@@ -97,7 +97,13 @@ namespace DoctorHelper.Doctor
         {
             var selectedItem = (ListView)sender;
             string dateTime = selectedItem.SelectedItem.ToString();
-            Navigation.PushAsync(new PatientInfo(GetPatientId(dateTime)));
+            Navigation.PushAsync(new BloodInvestigationResult(GetInvestigationId(dateTime)));
+        }
+
+        private void AddResultButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NewInvestigationResult(PatientId));
+            this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
         }
     }
 }

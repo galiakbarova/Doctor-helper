@@ -98,6 +98,7 @@ namespace DoctorHelper.Patient
             if (CheckDoctorSelection())
             {
                 Navigation.PushAsync(new Schedules(PatientId, GetDoctorId()));
+                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
             }
             else
                 DisplayAlert("Внимание!", "Выберите врача!", "OK");

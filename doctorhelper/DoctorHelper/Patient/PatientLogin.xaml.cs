@@ -65,7 +65,10 @@ namespace DoctorHelper.Patient
         void Login_Clicked(object sender, System.EventArgs e)
         {
             if (CheckUser())
+            {
                 Navigation.PushAsync(new PatientLK(UserId));
+                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+            }
             else
                 DisplayAlert("Внимание!", "Неверный логин или пароль!", "OK");
         }

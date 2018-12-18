@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DoctorHelper.Patient.BloodInvestigationResult"
+             Title="Результат исследования">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout x:Name="ContentField" Padding="16" Spacing="10">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Дата исследования:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="DateLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="HGB:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="HgbLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="RBC:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="RbcLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="WBC:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="WbcLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="EO:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="EoLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="BA:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="BaLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="NE:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="NeLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="MO:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="MoLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="ATL:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="AtlLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="PLT:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="PltLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="СОЭ:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="SoeLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Цвет:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="ColorLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="HCT:" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="HctLabel" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
